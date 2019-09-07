@@ -13,8 +13,14 @@ namespace EARefDataSplitter
         public Dictionary<string, ScriptGroup> scriptGroups { get; private set; } = new Dictionary<string, ScriptGroup>();
         public List<Script> scripts { get; private set; } = new List<Script>();
         public List<Script> individualScripts { get; private set; } = new List<Script>();
+        private SplitterSettings settings { get; set; }
         private Dictionary<string, Script> includableScripts { get; set; }
         private XDocument xDoc;
+
+        public RefDataParser(SplitterSettings settings)
+        {
+            this.settings = settings;
+        }
 
         public void unparse(string targetFilePath)
         {
@@ -97,11 +103,11 @@ namespace EARefDataSplitter
                             .Attribute("value").Value;
                 if (this.scriptGroups.TryGetValue(groupID,out var scriptGroup))
                 {
-                    script = new Script(scriptName, scriptGroup, scriptNode);
+                    script = new Script(scriptName, scriptGroup, scriptNode, this.settings);
                 }
                 else
                 {
-                    script = new Script(scriptName, groupID, scriptNode);
+                    script = new Script(scriptName, groupID, scriptNode, this.settings);
                     this.individualScripts.Add(script);
                 }
                 this.scripts.Add(script);

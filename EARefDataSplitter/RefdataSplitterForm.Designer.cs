@@ -35,7 +35,7 @@
             this.refdataFileLabel = new System.Windows.Forms.Label();
             this.refdataTreeView = new BrightIdeasSoftware.TreeListView();
             this.exportButton = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.AddIncludedScriptsCheckBox = new System.Windows.Forms.CheckBox();
             this.nameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.scriptTreeImages = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.refdataTreeView)).BeginInit();
@@ -82,6 +82,7 @@
             this.refdataTreeView.CheckedAspectName = "selected";
             this.refdataTreeView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.nameColumn});
+            this.refdataTreeView.Cursor = System.Windows.Forms.Cursors.Default;
             this.refdataTreeView.HideSelection = false;
             this.refdataTreeView.Location = new System.Drawing.Point(12, 66);
             this.refdataTreeView.Name = "refdataTreeView";
@@ -106,18 +107,19 @@
             this.exportButton.UseVisualStyleBackColor = true;
             this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
             // 
-            // checkBox1
+            // AddIncludedScriptsCheckBox
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(15, 391);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(121, 17);
-            this.checkBox1.TabIndex = 19;
-            this.checkBox1.Text = "Add included scripts";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.AddIncludedScriptsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.AddIncludedScriptsCheckBox.AutoSize = true;
+            this.AddIncludedScriptsCheckBox.Checked = true;
+            this.AddIncludedScriptsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AddIncludedScriptsCheckBox.Location = new System.Drawing.Point(15, 391);
+            this.AddIncludedScriptsCheckBox.Name = "AddIncludedScriptsCheckBox";
+            this.AddIncludedScriptsCheckBox.Size = new System.Drawing.Size(121, 17);
+            this.AddIncludedScriptsCheckBox.TabIndex = 19;
+            this.AddIncludedScriptsCheckBox.Text = "Add included scripts";
+            this.AddIncludedScriptsCheckBox.UseVisualStyleBackColor = true;
+            this.AddIncludedScriptsCheckBox.CheckedChanged += new System.EventHandler(this.AddIncludedScriptsCheckBox_CheckedChanged);
             // 
             // nameColumn
             // 
@@ -138,12 +140,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(429, 422);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.AddIncludedScriptsCheckBox);
             this.Controls.Add(this.exportButton);
             this.Controls.Add(this.refdataTreeView);
             this.Controls.Add(this.browseRefDataFileButton);
             this.Controls.Add(this.refdataTextBox);
             this.Controls.Add(this.refdataFileLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RefDataSplitterForm";
             this.Text = "Reference Data Splitter";
             ((System.ComponentModel.ISupportInitialize)(this.refdataTreeView)).EndInit();
@@ -159,7 +162,7 @@
         private System.Windows.Forms.Label refdataFileLabel;
         private BrightIdeasSoftware.TreeListView refdataTreeView;
         private System.Windows.Forms.Button exportButton;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox AddIncludedScriptsCheckBox;
         private BrightIdeasSoftware.OLVColumn nameColumn;
         private System.Windows.Forms.ImageList scriptTreeImages;
     }

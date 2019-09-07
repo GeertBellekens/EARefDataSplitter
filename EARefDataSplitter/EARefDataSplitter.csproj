@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>LogoFINAL.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
@@ -61,6 +64,7 @@
     <Compile Include="Script.cs" />
     <Compile Include="ScriptGroup.cs" />
     <Compile Include="ScriptInclude.cs" />
+    <Compile Include="SplitterSettings.cs" />
     <EmbeddedResource Include="RefdataSplitterForm.resx">
       <DependentUpon>RefdataSplitterForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -86,6 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LogoFINAL.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

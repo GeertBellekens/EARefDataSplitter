@@ -14,12 +14,14 @@ namespace EARefDataSplitter
     public partial class RefDataSplitterForm : Form
     {
         private RefDataParser parser;
+        private SplitterSettings settings = new SplitterSettings();
         public RefDataSplitterForm()
         {
             InitializeComponent();
             setDelegates();
             enableDisable();
-            
+            //set settings values
+            this.AddIncludedScriptsCheckBox.Checked = this.settings.addIncludedScripts;
         }
         private void enableDisable()
         {
@@ -97,7 +99,7 @@ namespace EARefDataSplitter
         {
             if (System.IO.File.Exists(this.refdataTextBox.Text))
             {
-                this.parser = new RefDataParser();
+                this.parser = new RefDataParser(this.settings);
                 parser.parseRefdata(this.refdataTextBox.Text);
                 //Load data in Treeview
                 var contents = new List<object>();
@@ -125,6 +127,11 @@ namespace EARefDataSplitter
                 //export to file
                 this.parser.unparse(filePath);
             }
+        }
+
+        private void AddIncludedScriptsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            this.settings.addIncludedScripts = this.AddIncludedScriptsCheckBox.Checked;
         }
     }
 }
