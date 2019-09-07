@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace EARefDataSplitter
         public Dictionary<string, ScriptGroup> scriptGroups { get; private set; } = new Dictionary<string, ScriptGroup>();
         public List<Script> scripts { get; private set; } = new List<Script>();
         public List<Script> individualScripts { get; private set; } = new List<Script>();
+        private Dictionary<string, Script> includableScripts { get; set; }
         private XDocument xDoc;
 
         public void unparse(string targetFilePath)
@@ -102,11 +104,68 @@ namespace EARefDataSplitter
                     script = new Script(scriptName, groupID, scriptNode);
                     this.individualScripts.Add(script);
                 }
-                //get dependencies
-                //TODO
                 this.scripts.Add(script);
             }
+            // get the includable scripts
+            getIncludableScripts();
+            //get the script dependencies
+            foreach(var script in this.scripts)
+            {
+                this.getScriptDependencies(script);
+            }
+
          }
+        public void getScriptDependencies(Script script)
+        {
+            var scriptContent = script.xElement.Elements("Column")
+                            .SingleOrDefault(e => e.Attribute("name").Value == "Script")
+                            .Attribute("value").Value;
+            //get includes
+            var includes = this.getIncludes(scriptContent);
+            foreach (var includeString in includes)
+            {
+                if (this.includableScripts.TryGetValue(includeString, out var includedScript))
+                {
+                    script.includedScripts.Add(new ScriptInclude(includedScript));
+                }
+            }
+        }
+        /// <summary>
+        /// creates a dictionary of scripts with the !INC statement as key
+        /// </summary>
+        private void getIncludableScripts()
+        {
+            this.includableScripts = new Dictionary<string, Script>();
+            foreach(var group in this.scriptGroups.Values)
+            {
+                foreach(var script in group.scripts)
+                {
+                    includableScripts[$"!INC {group.name}.{script.name}"] = script;
+                }
+            }
+        }
+
+        /// <summary>
+		/// finds each instance of "!INC" and returns the whole line
+		/// </summary>
+		/// <param name="code">the code to search</param>
+		/// <returns>the contents of each line starting with "!INC"</returns>
+		private List<string> getIncludes(string code)
+        {
+            List<string> includes = new List<string>();
+            using (StringReader reader = new StringReader(code))
+            {
+                string line;
+                while ((line = reader.ReadLine()?.Trim()) != null)
+                {
+                    if (line.StartsWith("!INC"))
+                    {
+                        includes.Add(line);
+                    }
+                }
+            }
+            return includes;
+        }
 
     }
 }

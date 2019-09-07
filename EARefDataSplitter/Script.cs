@@ -9,7 +9,7 @@ namespace EARefDataSplitter
 {
     public class Script
     {
-        public XElement xElement { get; private set; }
+        
         public Script(string scriptName, ScriptGroup scriptGroup, XElement xElement)
         {
             this.name= scriptName;
@@ -26,6 +26,8 @@ namespace EARefDataSplitter
 
         public string name { get; private set; }
         public ScriptGroup group { get; private set; }
+        public XElement xElement { get; private set; }
+        public List<ScriptInclude> includedScripts { get; private set; } = new List<ScriptInclude>();
         private string _groupID;
         public string groupID
         {
@@ -49,6 +51,13 @@ namespace EARefDataSplitter
                 else
                 {
                     this._selected = value.Value;
+                }
+                foreach(var includedScript in this.includedScripts)
+                {
+                    if (includedScript.selected != this.selected)
+                    {
+                        includedScript.selected = this.selected;
+                    }
                 }
             }
         }

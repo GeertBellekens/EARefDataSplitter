@@ -28,23 +28,42 @@ namespace EARefDataSplitter
         private void setDelegates()
         {
             //tell the control who can expand 
-            TreeListView.CanExpandGetterDelegate canExpandGetter = delegate (object x)
+            TreeListView.CanExpandGetterDelegate canExpandGetter = delegate (object o)
             {
-                var scriptGroup = x as ScriptGroup;
-                return scriptGroup != null && scriptGroup.scripts.Any();
+                var scriptGroup = o as ScriptGroup;
+                if (scriptGroup != null)
+                {
+                    return scriptGroup.scripts.Any();
+                }
+                var script = o as Script;
+                if (script != null)
+                {
+                    return script.includedScripts.Any();
+                }
+                return ((ScriptInclude)o).hasIncludes;                
             };
             this.refdataTreeView.CanExpandGetter = canExpandGetter;
             //tell the control how to expand
             TreeListView.ChildrenGetterDelegate childrenGetter = delegate (object o)
             {
                 var scriptGroup = o as ScriptGroup;
-                return scriptGroup?.scripts.OrderBy(x => x.name);
+                if (scriptGroup != null)
+                {
+                    return scriptGroup.scripts.OrderBy(x => x.name);
+                }
+                var script = o as Script;
+                if (script != null)
+                {
+                    return script.includedScripts;
+                }
+                return ((ScriptInclude)o).scriptIncludes;
             };
             this.refdataTreeView.ChildrenGetter = childrenGetter;
             //tell the control which image to show
             ImageGetterDelegate imageGetter = delegate (object rowObject)
             {
-                if (rowObject is Script)
+                if (rowObject is Script
+                || rowObject is ScriptInclude)
                 {
                     return "Script";
                 }
