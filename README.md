@@ -5,7 +5,8 @@ After developing scripts in Sparx Enterprise Architect you probably want to move
 The standard way to do this is to export the scripts using Reference Data Export.
 However, when exporting scripts this way, EA always includes **all** scripts. There is no option to select only a few scripts.
 
-The EARefDataSplitter tool will read such a refdata export, and allow you to select the script you need.
+The EARefDataSplitter tool will read such a refdata export, and allow you to select the scripts you need.
 With the export button you can then create a new refdata file with only the selected scripts.
+![EARefDataSplitter GUI](https://imgur.com/ivPLNVp) 
 
 The tool also has the option to add all included scripts (included using the **!INC** statement)
