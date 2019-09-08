@@ -7,6 +7,6 @@ However, when exporting scripts this way, EA always includes **all** scripts. Th
 
 The EARefDataSplitter tool will read such a refdata export, and allow you to select the scripts you need.
 With the export button you can then create a new refdata file with only the selected scripts.
-![EARefDataSplitter GUI](https://imgur.com/ivPLNVp) 
+![Imgur](https://imgur.com/ivPLNVp.jpg)
 
 The tool also has the option to add all included scripts (included using the **!INC** statement)
