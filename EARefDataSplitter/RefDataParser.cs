@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace EARefDataSplitter
@@ -47,13 +48,20 @@ namespace EARefDataSplitter
             }
             //save the export
             xDoc.Save(targetFilePath);
+            //to avoid useless \t\t\r\n in the file, open it again and remove those
+            string text = File.ReadAllText(targetFilePath);
+            text = text.Replace("\t\t\r\n", "");
+            File.WriteAllText(targetFilePath, text);
 
         }
 
         public void parseRefdata (string refDataFilePath)
         {
+            //need to parse this way to avoid tabs in the script code to be changed into spaces (normalization rules)
+            var reader = new XmlTextReader(new FileStream(refDataFilePath, FileMode.Open,
+                                            FileAccess.Read, FileShare.ReadWrite));
             // parse file into XDocument
-            this.xDoc = XDocument.Load(refDataFilePath);
+            this.xDoc = XDocument.Load(reader);
             var scriptNodes = new List<XElement>();
             //loop DataRow elements
             foreach(var dataRow in xDoc.Descendants("DataRow"))

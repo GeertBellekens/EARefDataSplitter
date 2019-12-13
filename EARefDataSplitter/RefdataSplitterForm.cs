@@ -97,6 +97,10 @@ namespace EARefDataSplitter
 
         private void refdataTextBox_TextChanged(object sender, EventArgs e)
         {
+            loadFile();
+        }
+        private void loadFile()
+        {
             if (System.IO.File.Exists(this.refdataTextBox.Text))
             {
                 this.parser = new RefDataParser(this.settings);
@@ -127,6 +131,8 @@ namespace EARefDataSplitter
                 //export to file
                 this.parser.unparse(filePath);
             }
+            //refresh the file in case the user choose to save to the same path
+            this.loadFile();
         }
 
         private void AddIncludedScriptsCheckBox_CheckedChanged(object sender, EventArgs e)
