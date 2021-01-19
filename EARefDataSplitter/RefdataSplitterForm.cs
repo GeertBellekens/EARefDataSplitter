@@ -88,7 +88,9 @@ namespace EARefDataSplitter
             var dialogResult = browseImportFileDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
             {
-                //if the user selected the file then put the filename in the abbreviationsfileTextBox
+                //reset to empty
+                this.refdataTextBox.Text = string.Empty;
+                //before setting to filename, to make sure the loadfile is triggered
                 this.refdataTextBox.Text = browseImportFileDialog.FileName;
                 //move cursor to end to make sure the end of the path is visible
                 this.refdataTextBox.Select(this.refdataTextBox.Text.Length, 0);
