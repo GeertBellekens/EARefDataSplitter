@@ -49,9 +49,10 @@ namespace EARefDataSplitter
             //save the export
             xDoc.Save(targetFilePath);
             //to avoid useless \t\t\r\n in the file, open it again and remove those
-            string text = File.ReadAllText(targetFilePath);
+            var enc = Encoding.GetEncoding(xDoc.Declaration.Encoding);
+            string text = File.ReadAllText(targetFilePath,enc);
             text = text.Replace("\t\t\r\n", "");
-            File.WriteAllText(targetFilePath, text);
+            File.WriteAllText(targetFilePath, text, enc);
 
         }
 
