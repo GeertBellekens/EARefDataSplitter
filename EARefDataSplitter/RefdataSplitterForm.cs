@@ -136,9 +136,17 @@ namespace EARefDataSplitter
                 var filePath = browseExportFileDialog.FileName;
                 //export to file
                 this.parser.unparse(filePath);
-            }
-            //refresh the file in case the user choose to save to the same path
-            this.loadFile();
+                if (!filePath.Equals(refdataTextBox.Text, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    
+                    this.refdataTextBox.Text = filePath;
+                }
+                else
+                {
+                    //refresh the file in case the user choose to save to the same path
+                    this.loadFile();
+                }               
+            }            
         }
 
         private void AddIncludedScriptsCheckBox_CheckedChanged(object sender, EventArgs e)
