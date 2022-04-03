@@ -77,6 +77,10 @@ namespace EARefDataSplitter
             this.nameColumn.ImageGetter = imageGetter;
         }
 
+        public void loadTempfile(string fileName)
+        {
+            this.refdataTextBox.Text = fileName; //loading happens automatically
+        }
 
         private void browseRefDataFileButton_Click(object sender, EventArgs e)
         {
