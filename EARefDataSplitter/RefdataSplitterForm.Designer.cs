@@ -34,10 +34,12 @@
             this.refdataTextBox = new System.Windows.Forms.TextBox();
             this.refdataFileLabel = new System.Windows.Forms.Label();
             this.refdataTreeView = new BrightIdeasSoftware.TreeListView();
-            this.exportButton = new System.Windows.Forms.Button();
-            this.AddIncludedScriptsCheckBox = new System.Windows.Forms.CheckBox();
             this.nameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.scriptTreeImages = new System.Windows.Forms.ImageList(this.components);
+            this.exportButton = new System.Windows.Forms.Button();
+            this.AddIncludedScriptsCheckBox = new System.Windows.Forms.CheckBox();
+            this.environmentsDropdown = new System.Windows.Forms.ComboBox();
+            this.transferToButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.refdataTreeView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,38 +90,14 @@
             this.refdataTreeView.Name = "refdataTreeView";
             this.refdataTreeView.ShowGroups = false;
             this.refdataTreeView.ShowImagesOnSubItems = true;
-            this.refdataTreeView.Size = new System.Drawing.Size(405, 310);
+            this.refdataTreeView.Size = new System.Drawing.Size(405, 288);
             this.refdataTreeView.SmallImageList = this.scriptTreeImages;
             this.refdataTreeView.TabIndex = 17;
             this.refdataTreeView.TriStateCheckBoxes = true;
             this.refdataTreeView.UseCompatibleStateImageBehavior = false;
             this.refdataTreeView.View = System.Windows.Forms.View.Details;
             this.refdataTreeView.VirtualMode = true;
-            // 
-            // exportButton
-            // 
-            this.exportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.exportButton.Location = new System.Drawing.Point(342, 387);
-            this.exportButton.Name = "exportButton";
-            this.exportButton.Size = new System.Drawing.Size(75, 23);
-            this.exportButton.TabIndex = 18;
-            this.exportButton.Text = "Export";
-            this.exportButton.UseVisualStyleBackColor = true;
-            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
-            // 
-            // AddIncludedScriptsCheckBox
-            // 
-            this.AddIncludedScriptsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.AddIncludedScriptsCheckBox.AutoSize = true;
-            this.AddIncludedScriptsCheckBox.Checked = true;
-            this.AddIncludedScriptsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AddIncludedScriptsCheckBox.Location = new System.Drawing.Point(15, 391);
-            this.AddIncludedScriptsCheckBox.Name = "AddIncludedScriptsCheckBox";
-            this.AddIncludedScriptsCheckBox.Size = new System.Drawing.Size(121, 17);
-            this.AddIncludedScriptsCheckBox.TabIndex = 19;
-            this.AddIncludedScriptsCheckBox.Text = "Add included scripts";
-            this.AddIncludedScriptsCheckBox.UseVisualStyleBackColor = true;
-            this.AddIncludedScriptsCheckBox.CheckedChanged += new System.EventHandler(this.AddIncludedScriptsCheckBox_CheckedChanged);
+            this.refdataTreeView.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.refdataTreeView_ItemChecked);
             // 
             // nameColumn
             // 
@@ -135,11 +113,58 @@
             this.scriptTreeImages.Images.SetKeyName(0, "Script");
             this.scriptTreeImages.Images.SetKeyName(1, "ScriptGroup");
             // 
+            // exportButton
+            // 
+            this.exportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.exportButton.Location = new System.Drawing.Point(342, 360);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(75, 23);
+            this.exportButton.TabIndex = 18;
+            this.exportButton.Text = "Export";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
+            // 
+            // AddIncludedScriptsCheckBox
+            // 
+            this.AddIncludedScriptsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.AddIncludedScriptsCheckBox.AutoSize = true;
+            this.AddIncludedScriptsCheckBox.Checked = true;
+            this.AddIncludedScriptsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AddIncludedScriptsCheckBox.Location = new System.Drawing.Point(15, 364);
+            this.AddIncludedScriptsCheckBox.Name = "AddIncludedScriptsCheckBox";
+            this.AddIncludedScriptsCheckBox.Size = new System.Drawing.Size(121, 17);
+            this.AddIncludedScriptsCheckBox.TabIndex = 19;
+            this.AddIncludedScriptsCheckBox.Text = "Add included scripts";
+            this.AddIncludedScriptsCheckBox.UseVisualStyleBackColor = true;
+            this.AddIncludedScriptsCheckBox.CheckedChanged += new System.EventHandler(this.AddIncludedScriptsCheckBox_CheckedChanged);
+            // 
+            // environmentsDropdown
+            // 
+            this.environmentsDropdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.environmentsDropdown.FormattingEnabled = true;
+            this.environmentsDropdown.Location = new System.Drawing.Point(268, 389);
+            this.environmentsDropdown.Name = "environmentsDropdown";
+            this.environmentsDropdown.Size = new System.Drawing.Size(149, 21);
+            this.environmentsDropdown.TabIndex = 20;
+            // 
+            // transferToButton
+            // 
+            this.transferToButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.transferToButton.Location = new System.Drawing.Point(187, 387);
+            this.transferToButton.Name = "transferToButton";
+            this.transferToButton.Size = new System.Drawing.Size(75, 23);
+            this.transferToButton.TabIndex = 21;
+            this.transferToButton.Text = "Transfer to";
+            this.transferToButton.UseVisualStyleBackColor = true;
+            this.transferToButton.Click += new System.EventHandler(this.transferToButton_Click);
+            // 
             // RefDataSplitterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(429, 422);
+            this.Controls.Add(this.transferToButton);
+            this.Controls.Add(this.environmentsDropdown);
             this.Controls.Add(this.AddIncludedScriptsCheckBox);
             this.Controls.Add(this.exportButton);
             this.Controls.Add(this.refdataTreeView);
@@ -165,6 +190,8 @@
         private System.Windows.Forms.CheckBox AddIncludedScriptsCheckBox;
         private BrightIdeasSoftware.OLVColumn nameColumn;
         private System.Windows.Forms.ImageList scriptTreeImages;
+        private System.Windows.Forms.ComboBox environmentsDropdown;
+        private System.Windows.Forms.Button transferToButton;
     }
 }
 
