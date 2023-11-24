@@ -172,8 +172,15 @@ namespace EARefDataSplitter
         {
             if (this.transferToButtonClick != null)
             {
+                this.transferToButton.Enabled = false;
+                this.transferToButton.Text = "Transferring...";
                 transferToButtonClick(sender, e);
             }
+        }
+        public void setTransferFinished()
+        {
+            this.transferToButton.Enabled = true;
+            this.transferToButton.Text = "Transfer to";
         }
 
         private void refdataTreeView_ItemChecked(object sender, ItemCheckedEventArgs e)
